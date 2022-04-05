@@ -1,4 +1,4 @@
-FROM returntocorp/semgrep:0.86.5
+FROM harbor.rvision.pro/sec/semgrep:v0.86.5
 
 USER root
 WORKDIR /semgrep-agent

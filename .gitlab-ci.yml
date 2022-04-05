@@ -1,0 +1,13 @@
+before_script:
+  - export DOCKER_CONFIG="${CI_PROJECT_DIR}/.docker-config/"
+stages:
+  - build
+
+semgrep_build:
+  stage: build
+  script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin  $CI_REGISTRY
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/semgrep-agent:0.86.5" -f Dockerfile .
+    - docker push "$CI_REGISTRY_IMAGE/semgrep-agent:0.86.5"
+  tags:
+    - common-shell
